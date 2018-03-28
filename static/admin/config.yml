@@ -1,11 +1,13 @@
 backend:
-  name: test-repo
+  name: github
+  repo: georgesboris/fadb
 
 media_folder: static/assets
 
 collections:
   - name: projects
     label: Projects
+    label_singular: Project
     folder: projects
     create: true
     fields:
@@ -31,6 +33,7 @@ collections:
         name: images
         label: Images
         widget: list
+        required: false
         fields:
           - { name: image, label: Image, widget: image }
           - { name: description, label: Description }
