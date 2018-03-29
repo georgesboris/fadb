@@ -60,13 +60,13 @@ const ProjectPicture = styled.img`
  * Main component
  */
 
-const Project = ({ title, year, meta, description, pictures }) => {
+const Project = ({ title, date, meta, description, pictures }) => {
   return (
     <Wrapper>
       <ProjectInfoWrapper>
         <ProjectHeader>
           <ProjectTitle>{title}</ProjectTitle>
-          <ProjectDate>{year}</ProjectDate>
+          <ProjectDate>{date}</ProjectDate>
         </ProjectHeader>
         <TextBlock>{meta}</TextBlock>
         <TextBlock>{description}</TextBlock>
@@ -84,3 +84,25 @@ const Project = ({ title, year, meta, description, pictures }) => {
 }
 
 export default Project
+
+/**
+ * Query
+ */
+
+export const query = graphql`
+  fragment ProjectFragment on MarkdownRemark {
+    fields {
+      slug
+    }
+    frontmatter {
+      title
+      date(formatString: "YYYY")
+      meta
+      description
+      images {
+        alt
+        image
+      }
+    }
+  }
+`

@@ -12,9 +12,6 @@ collections:
     create: true
     fields:
       - 
-        name: path
-        label: Path
-      - 
         name: title
         label: Title
       - 

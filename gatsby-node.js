@@ -1,10 +1,24 @@
 const path = require("path")
+const slug = require("slug")
+
+/**
+ * Create project pages
+ */
+
+exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
+  const { createNodeField } = boundActionCreators
+  if (node.internal.type === `MarkdownRemark`) {
+    createNodeField({
+      node,
+      name: `slug`,
+      value: slug(node.frontmatter.title, { lower: true })
+    })
+  }
+}
 
 exports.createPages = ({ boundActionCreators, graphql }) => {
   const { createPage } = boundActionCreators
-
   const projectTemplate = path.resolve(`src/templates/projectTemplate.js`)
-
   return graphql(`
     {
       allMarkdownRemark(
@@ -13,8 +27,11 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
       ) {
         edges {
           node {
+            fields {
+              slug
+            }
             frontmatter {
-              path
+              title
             }
           }
         }
@@ -26,9 +43,12 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
     }
 
     result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+      const { slug } = node.fields
+      const { title } = node.frontmatter
       createPage({
-        path: node.frontmatter.path,
-        component: projectTemplate
+        path: `/projects/${slug}`,
+        component: projectTemplate,
+        context: { title }
       })
     })
   })
