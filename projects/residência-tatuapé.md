@@ -1,7 +1,6 @@
 ---
-path: residencia-tatuape
 title: Residência Tatuapé
-date: 2016-11-24T11:03:11-03:00
+date: 2016-11-24T14:03:11.000Z
 meta: |-
   Flavio Bragaia
   Juliano Ijichi Machado
@@ -17,5 +16,7 @@ description: >-
   A casa, com ótima ventilação e iluminação naturais, recebe um casal e dois
   filhos, seus animais de estimação e frequentes visitantes, além de uma série
   de objetos de grande valor sentimental para os proprietários.
+images:
+  - image: /static/assets/logo-fadb.png
 ---
 
