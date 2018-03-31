@@ -2,8 +2,8 @@ backend:
   name: github
   repo: georgesboris/fadb
 
-media_folder: static/assets
-public_folder: /assets
+media_folder: static/media
+public_folder: /media
 
 collections:
   - name: pages
