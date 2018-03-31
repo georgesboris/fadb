@@ -142,6 +142,7 @@ export const query = graphql`
     frontmatter {
       title
       date(formatString: "YYYY")
+      categories
     }
   }
 `
