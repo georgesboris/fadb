@@ -1,6 +1,7 @@
 ---
 title: Residência Tatuapé
-date: 2016-11-23T11:03:11-03:00
+date: 2016-11-23T14:03:11.000Z
+categories: residencial
 meta: |-
   Flavio Bragaia
   Juliano Ijichi Machado
