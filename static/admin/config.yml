@@ -6,10 +6,44 @@ media_folder: static/assets
 public_folder: /assets
 
 collections:
+  - name: pages
+    label: Pages
+    files:
+      - label: Settings
+        name: settings
+        file: src/content/settings.md
+        fields:
+          -
+            name: logo
+            label: Site logo
+            widget: image
+          -
+            name: title
+            label: Site title
+          - 
+            name: tags
+            label: SEO Tags
+            widget: text
+      - label: Info
+        name: info
+        file: src/content/info.md
+        fields:
+          -
+            name: info_pt
+            label: Info - PT
+            widget: text
+          -
+            name: info_en
+            label: Info - EN
+            widget: text
+          -
+            name: contact
+            label: contact
+            widget: text
   - name: projects
     label: Projects
     label_singular: Project
-    folder: projects
+    folder: src/content/projects
     create: true
     slug: '{{slug}}'
     fields:
