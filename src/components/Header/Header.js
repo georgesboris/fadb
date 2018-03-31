@@ -63,20 +63,29 @@ const Header = () => (
 
     <nav>
       <NavList>
-        {[["/", "info"], ["/projects", "projetos"]].map(([path, name]) => (
-          <NavItem key={path}>
-            <Link
-              to={path}
-              exact
-              activeStyle={{
-                color: "white",
-                background: "black"
-              }}
-            >
-              {name}
-            </Link>
-          </NavItem>
-        ))}
+        <NavItem>
+          <Link
+            to="/"
+            exact
+            activeStyle={{
+              color: "white",
+              background: "black"
+            }}
+          >
+            info
+          </Link>
+        </NavItem>
+        <NavItem>
+          <Link
+            to="/projects"
+            activeStyle={{
+              color: "white",
+              background: "black"
+            }}
+          >
+            projetos
+          </Link>
+        </NavItem>
       </NavList>
     </nav>
   </header>

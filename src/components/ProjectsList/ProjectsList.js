@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import Link from "gatsby-link"
 import Select from "../Select/Select"
+import Divider from "../Divider/Divider"
 import styled from "styled-components"
 import PropTypes from "prop-types"
 
@@ -11,7 +12,7 @@ import PropTypes from "prop-types"
 const Wrapper = styled.div``
 
 const FiltersWrapper = styled.section`
-  padding-bottom: 3.4rem;
+  padding-bottom: 0.4rem;
 `
 
 const ProjectListWrapper = styled.section``
@@ -64,8 +65,20 @@ const getProjectsYearsAndCategories = projects => {
   )
 
   return {
-    years: Object.keys(years).sort(),
-    categories: Object.keys(categories).sort()
+    years: Object.keys(years)
+      .sort()
+      .map(year => ({
+        value: year,
+        label: year,
+        section: "Por ano"
+      })),
+    categories: Object.keys(categories)
+      .sort()
+      .map(category => ({
+        value: category,
+        label: category,
+        section: "Por tipologia"
+      }))
   }
 }
 
@@ -74,6 +87,8 @@ const getProjectsYearsAndCategories = projects => {
  */
 
 class ProjectsList extends Component {
+  static defaultFilter = { value: null, label: "Exibir todos" }
+
   static propTypes = {
     projects: PropTypes.arrayOf(
       PropTypes.shape({
@@ -84,7 +99,7 @@ class ProjectsList extends Component {
   }
 
   state = {
-    filter: null,
+    filter: ProjectsList.defaultFilter,
     years: [],
     categories: []
   }
@@ -96,19 +111,31 @@ class ProjectsList extends Component {
   render() {
     const { projects } = this.props
     const { filter, years, categories } = this.state
+
+    const filteredProjects = !!filter.value
+      ? filter.section === "por ano"
+        ? projects.filter(project => project.date === filter.value)
+        : projects.filter(
+            project => project.categories.indexOf(filter.value) !== -1
+          )
+      : projects
+
     return (
       <Wrapper>
         <FiltersWrapper>
           <Select
             value={filter}
-            items={[...years, ...categories]}
-            onChange={filter => this.setState({ filter })}
+            placeholder="Filtros"
+            items={[ProjectsList.defaultFilter, ...years, ...categories]}
+            onChange={filter => {
+              this.setState({ filter })
+            }}
           />
         </FiltersWrapper>
 
         <ProjectListWrapper>
           <ul>
-            {projects.map(project => {
+            {filteredProjects.map(project => {
               const { slug, title } = project
               return (
                 <li key={slug}>

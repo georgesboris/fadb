@@ -42,7 +42,7 @@ const Container = styled.div`
 `
 
 const Main = styled.main`
-  padding-top: 4rem;
+  padding-top: 2rem;
 `
 
 /**

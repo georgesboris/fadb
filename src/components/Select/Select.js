@@ -10,8 +10,8 @@ import styled from "styled-components"
 const colorInactive = "#999"
 const colorInactiveBg = "#f5f5f5"
 
-const colorActive = "#dadada"
-const colorActiveBg = "#000"
+const colorActive = "white"
+const colorActiveBg = "black"
 
 const Wrapper = styled.div`
   position: relative;
@@ -26,7 +26,6 @@ const Button = styled.button`
   padding: 0.6rem 2rem;
   border: none;
   text-align: left;
-  text-transform: uppercase;
   cursor: pointer;
 
   background: ${props => (props.active ? colorActiveBg : colorInactiveBg)};
@@ -74,22 +73,36 @@ const Button = styled.button`
 
 const ListWrapper = styled.div`
   position: absolute;
+  z-index: 1;
   top: 100%;
-  width: 100%;
-  margin-top: 0.4rem;
+  margin-top: 0.8rem;
+  left: 0.4rem;
+  right: 0.4rem;
+  padding: 0.4rem;
+  background: white;
   box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.2);
 `
 
+const SectionHeader = styled.div`
+  padding: 0.6rem 1.2rem;
+  color: #999;
+`
+
 const ItemWrapper = styled.div`
-  padding: 0.6rem 2rem;
+  padding: 0.6rem 1.2rem;
   font-size: 1.2rem;
   cursor: pointer;
 `
 
-const Select = ({ items = [], value, onChange }) => {
+/**
+ * Main Component
+ */
+
+const Select = ({ items = [], value, placeholder, onChange }) => {
   return (
     <Downshift
       onChange={onChange}
+      itemToString={x => (x ? x.label : "null")}
       render={({
         getItemProps,
         isOpen,
@@ -99,28 +112,29 @@ const Select = ({ items = [], value, onChange }) => {
         getRootProps
       }) => (
         <Wrapper {...getRootProps({ refKey: "innerRef" })}>
-          <Button active={!!value} {...getToggleButtonProps()}>
-            {value || "Filtro"}
+          <Button active={!!value.value} {...getToggleButtonProps()}>
+            {!!value.value ? value.label : placeholder || "…"}
           </Button>
           {isOpen && (
             <ListWrapper>
               {items.map((item, index) => (
-                <ItemWrapper
-                  {...getItemProps({ item })}
-                  key={item}
-                  style={{
-                    backgroundColor:
-                      highlightedIndex === index || selectedItem === item
-                        ? "black"
-                        : "white",
-                    color:
-                      highlightedIndex === index || selectedItem === item
-                        ? "white"
-                        : "black"
-                  }}
-                >
-                  {item}
-                </ItemWrapper>
+                <div key={item.value}>
+                  {index > 0 &&
+                    items[index - 1].section !== item.section &&
+                    item.section !== undefined && (
+                      <SectionHeader>{item.section}</SectionHeader>
+                    )}
+                  <ItemWrapper
+                    {...getItemProps({ item })}
+                    style={{
+                      fontWeight: selectedItem === item ? "bold" : "normal",
+                      backgroundColor:
+                        highlightedIndex === index ? "#f5f5f5" : "white"
+                    }}
+                  >
+                    {item.label}
+                  </ItemWrapper>
+                </div>
               ))}
             </ListWrapper>
           )}

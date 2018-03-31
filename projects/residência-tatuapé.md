@@ -18,6 +18,5 @@ description: >-
   filhos, seus animais de estimação e frequentes visitantes, além de uma série
   de objetos de grande valor sentimental para os proprietários.
 images:
-  - image: /static/assets/logo-fadb.png
+  - image: /assets/logo-fadb.png
 ---
-

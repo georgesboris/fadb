@@ -1,6 +1,7 @@
 // react
-import React from "react"
+import React, { Component } from "react"
 import TextBlock from "../TextBlock/TextBlock"
+import Lightbox from "../Lightbox/Lightbox"
 // etc
 import styled from "styled-components"
 
@@ -39,11 +40,12 @@ const ProjectPicturesWrapper = styled.section`
 `
 
 const ProjectPictureWrapper = styled.div`
-  display: flex;
+  overflow: auto;
   width: 50%;
   padding: 0.5rem;
 `
 const ProjectPicture = styled.img`
+  float: left;
   width: 100%;
   height: auto;
   cursor: pointer;
@@ -60,27 +62,56 @@ const ProjectPicture = styled.img`
  * Main component
  */
 
-const Project = ({ title, date, meta, description, pictures }) => {
-  return (
-    <Wrapper>
-      <ProjectInfoWrapper>
-        <ProjectHeader>
-          <ProjectTitle>{title}</ProjectTitle>
-          <ProjectDate>{date}</ProjectDate>
-        </ProjectHeader>
-        <TextBlock>{meta}</TextBlock>
-        <TextBlock>{description}</TextBlock>
-      </ProjectInfoWrapper>
-      <ProjectPicturesWrapper>
-        {pictures &&
-          pictures.map((picture, i) => (
-            <ProjectPictureWrapper key={i}>
-              <ProjectPicture src={picture.url} />
-            </ProjectPictureWrapper>
-          ))}
-      </ProjectPicturesWrapper>
-    </Wrapper>
-  )
+class Project extends Component {
+  state = {
+    activeImage: null
+  }
+
+  onChangeActiveImage = index => {
+    this.setState({
+      activeImage: index
+    })
+  }
+
+  onCloseLightbox = () => {
+    this.setState({
+      activeImage: null
+    })
+  }
+
+  render() {
+    const { title, date, meta, description, images: _images } = this.props
+    const { activeImage } = this.state
+    const images = _images ? _images.map(o => ({ src: o.image })) : []
+    return (
+      <Wrapper>
+        <ProjectInfoWrapper>
+          <ProjectHeader>
+            <ProjectTitle>{title}</ProjectTitle>
+            <ProjectDate>{date}</ProjectDate>
+          </ProjectHeader>
+          <TextBlock formatted>{meta}</TextBlock>
+          <TextBlock>{description}</TextBlock>
+        </ProjectInfoWrapper>
+        <ProjectPicturesWrapper>
+          {images &&
+            images.map((image, i) => (
+              <ProjectPictureWrapper key={i}>
+                <ProjectPicture
+                  src={image.src}
+                  onClick={() => this.onChangeActiveImage(i)}
+                />
+              </ProjectPictureWrapper>
+            ))}
+        </ProjectPicturesWrapper>
+        <Lightbox
+          images={images}
+          activeIndex={activeImage}
+          onChangeActiveIndex={this.onChangeActiveImage}
+        />
+      </Wrapper>
+    )
+  }
 }
 
 export default Project
