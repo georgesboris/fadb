@@ -100,7 +100,6 @@ export const query = graphql`
       meta
       description
       images {
-        alt
         image
       }
     }

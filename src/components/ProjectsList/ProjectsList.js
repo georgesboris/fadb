@@ -29,6 +29,47 @@ const ProjectListItem = styled(Link)`
 `
 
 /**
+ * Helpers
+ */
+
+const getProjectCategoriesObj = project =>
+  project.categories.split(",").reduce((acc, category) => {
+    const parsedCategory = category.trim()
+    if (parsedCategory) {
+      acc[parsedCategory] = true
+    }
+    return acc
+  }, {})
+
+const getProjectsYearsAndCategories = projects => {
+  if (!projects) {
+    return {
+      years: [],
+      categories: []
+    }
+  }
+
+  const { years, categories } = projects.reduce(
+    (acc, project) => ({
+      years: {
+        ...acc.years,
+        [project.date]: true
+      },
+      categories: {
+        ...acc.categories,
+        ...getProjectCategoriesObj(project)
+      }
+    }),
+    { years: {}, categories: {} }
+  )
+
+  return {
+    years: Object.keys(years).sort(),
+    categories: Object.keys(categories).sort()
+  }
+}
+
+/**
  * Main Component
  */
 
@@ -43,18 +84,24 @@ class ProjectsList extends Component {
   }
 
   state = {
-    filter: null
+    filter: null,
+    years: [],
+    categories: []
+  }
+
+  componentDidMount() {
+    this.setState(getProjectsYearsAndCategories(this.props.projects))
   }
 
   render() {
     const { projects } = this.props
-    const { filter } = this.state
+    const { filter, years, categories } = this.state
     return (
       <Wrapper>
         <FiltersWrapper>
           <Select
             value={filter}
-            items={["2016", "2017", "2018"]}
+            items={[...years, ...categories]}
             onChange={filter => this.setState({ filter })}
           />
         </FiltersWrapper>
@@ -94,6 +141,7 @@ export const query = graphql`
     }
     frontmatter {
       title
+      date(formatString: "YYYY")
     }
   }
 `
