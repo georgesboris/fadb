@@ -2,25 +2,37 @@ import React from "react"
 import Link from "gatsby-link"
 import TextBlock from "../components/TextBlock/TextBlock"
 
-const PageHome = () => (
-  <div>
-    <TextBlock>
-      Flavio A D Bragaia é arquiteto formado pela Faculdade de Arquitetura e
-      Urbanismo da Universidade de São Paulo em 2012. Estudou em Zurique, Suíça,
-      e em Lisboa, Portugal. Trabalhou com arquitetos como Antônio Carlos
-      Barossi e Paulo Bastos, colaborou com atividades de ensino e pesquisa e
-      durante dois anos e meio fez parte da equipe do escritório METRO
-      Arquitetos Associados.
-    </TextBlock>
-    <TextBlock style={{ fontStyle: "italic" }}>
-      Flavio A D Bragaia is an architect graduated at the Faculty of
-      Architecture and Urbanism of University of São Paulo in 2012. Studied in
-      Zurich, Switzerland, and Lisbon, Portugal. Worked with architects such as
-      Antônio Carlos Barossi and Paulo Bastos, collaborated with teaching and
-      researching activities and for two and a half years was part of the METRO
-      Arquitetos Associados team.
-    </TextBlock>
-  </div>
-)
+/**
+ * Main component
+ */
+
+const PageHome = props => {
+  const { info_pt, info_en, contact } = data.info.frontmatter
+  return (
+    <div>
+      <TextBlock>{info_pt}</TextBlock>
+      <TextBlock style={{ fontStyle: "italic" }}>{info_en}</TextBlock>
+      <TextBlock>{contact}</TextBlock>
+    </div>
+  )
+}
 
 export default PageHome
+
+/**
+ * Query
+ */
+
+export const query = graphql`
+  query InfoPageQuery {
+    info: markdownRemark(
+      fields: { collection: { eq: "pages" }, slug: { eq: "info" } }
+    ) {
+      frontmatter {
+        info_pt
+        info_en
+        contact
+      }
+    }
+  }
+`

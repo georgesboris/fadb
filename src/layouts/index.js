@@ -49,26 +49,48 @@ const Main = styled.main`
  * Main component
  */
 
-const Layout = ({ children, data }) => (
-  <Container>
-    <Helmet
-      title="FADB"
-      meta={[
-        { name: "description", content: "Arquiteto Flavio A. D. Bragaia" },
-        {
-          name: "keywords",
-          content:
-            "arquitetura, arquiteto, são paulo, sp, brasil, obras, portfólio"
-        }
-      ]}
-    />
-    <Header />
-    <Main>{children()}</Main>
-  </Container>
-)
+const Layout = ({ children, data }) => {
+  const {
+    site_title: title,
+    site_description: description,
+    site_tags: tags
+  } = data.settings.frontmatter
+  return (
+    <Container>
+      <Helmet
+        title={title}
+        meta={[
+          { name: "description", content: description },
+          {
+            name: "keywords",
+            content: tags
+          }
+        ]}
+      />
+      <Header />
+      <Main>{children()}</Main>
+    </Container>
+  )
+}
 
 Layout.propTypes = {
   children: PropTypes.func
 }
 
 export default Layout
+
+/**
+ * Query
+ */
+
+export const query = graphql`
+  query SiteDataQuery {
+    settings: markdownRemark(frontmatter: { title: { eq: "settings" } }) {
+      frontmatter {
+        site_title
+        site_description
+        site_tags
+      }
+    }
+  }
+`

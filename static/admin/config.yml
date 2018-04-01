@@ -14,23 +14,53 @@ collections:
         file: src/content/pages/settings.md
         fields:
           -
-            name: logo
+            name: title
+            default: settings
+            widget: hidden
+          -
+            name: site_logo
             label: Site logo
             widget: image
           -
-            name: title
+            name: site_title
             label: Site title
           -
-            name: description
+            name: site_description
             label: Site description
           - 
-            name: tags
+            name: seo_tags
             label: SEO Tags
             widget: text
+          # enable graphQL queries on
+          # empty projects collection
+          - 
+            name: date
+            widget: hidden
+            required: false
+          - 
+            name: categories
+            widget: hidden
+            required: false
+          - 
+            name: meta
+            widget: hidden
+            required: false
+          - 
+            name: description
+            widget: hidden
+            required: false
+          - 
+            name: images
+            widget: hidden
+            required: false
       - label: Info
         name: info
         file: src/content/pages/info.md
         fields:
+          -
+            name: title
+            default: info
+            widget: hidden
           -
             name: info_pt
             label: Info - PT
@@ -50,6 +80,10 @@ collections:
     create: true
     slug: '{{slug}}'
     fields:
+      -
+        name: template
+        default: project
+        widget: hidden
       - 
         name: title
         label: Title

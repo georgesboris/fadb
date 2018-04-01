@@ -1,4 +1,5 @@
 ---
+title: info
 info_pt: >-
   Flavio A D Bragaia é arquiteto formado pela Faculdade de Arquitetura e
   Urbanismo da Universidade de São Paulo em 2012. Estudou em Zurique, Suíça, e
@@ -14,4 +15,3 @@ info_en: >-
   Associados team.
 contact: fadb@fadb.com.br
 ---
-
