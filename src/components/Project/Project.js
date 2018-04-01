@@ -120,19 +120,19 @@ export default Project
  * Query
  */
 
-export const query = graphql`
-  fragment ProjectFragment on MarkdownRemark {
-    fields {
-      slug
-    }
-    frontmatter {
-      title
-      date(formatString: "YYYY")
-      meta
-      description
-      images {
-        image
-      }
-    }
-  }
-`
+// export const query = graphql`
+//   fragment ProjectFragment on MarkdownRemark {
+//     fields {
+//       slug
+//     }
+//     frontmatter {
+//       title
+//       date(formatString: "YYYY")
+//       meta
+//       description
+//       images {
+//         image
+//       }
+//     }
+//   }
+// `

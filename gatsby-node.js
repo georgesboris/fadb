@@ -16,40 +16,40 @@ exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
   }
 }
 
-exports.createPages = ({ boundActionCreators, graphql }) => {
-  const { createPage } = boundActionCreators
-  const projectTemplate = path.resolve(`src/templates/projectTemplate.js`)
-  return graphql(`
-    {
-      allMarkdownRemark(
-        sort: { order: DESC, fields: [frontmatter___date] }
-        limit: 1000
-      ) {
-        edges {
-          node {
-            fields {
-              slug
-            }
-            frontmatter {
-              title
-            }
-          }
-        }
-      }
-    }
-  `).then(result => {
-    if (result.errors) {
-      return Promise.reject(result.errors)
-    }
+// exports.createPages = ({ boundActionCreators, graphql }) => {
+//   const { createPage } = boundActionCreators
+//   const projectTemplate = path.resolve(`src/templates/projectTemplate.js`)
+//   return graphql(`
+//     {
+//       allMarkdownRemark(
+//         sort: { order: DESC, fields: [frontmatter___date] }
+//         limit: 1000
+//       ) {
+//         edges {
+//           node {
+//             fields {
+//               slug
+//             }
+//             frontmatter {
+//               title
+//             }
+//           }
+//         }
+//       }
+//     }
+//   `).then(result => {
+//     if (result.errors) {
+//       return Promise.reject(result.errors)
+//     }
 
-    result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-      const { slug } = node.fields
-      const { title } = node.frontmatter
-      createPage({
-        path: `/projects/${slug}`,
-        component: projectTemplate,
-        context: { title }
-      })
-    })
-  })
-}
+//     result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+//       const { slug } = node.fields
+//       const { title } = node.frontmatter
+//       createPage({
+//         path: `/projects/${slug}`,
+//         component: projectTemplate,
+//         context: { title }
+//       })
+//     })
+//   })
+// }

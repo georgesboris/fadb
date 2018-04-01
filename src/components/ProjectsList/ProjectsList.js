@@ -161,15 +161,15 @@ class ProjectsList extends Component {
 
 export default ProjectsList
 
-export const query = graphql`
-  fragment AllProjectsFragment on MarkdownRemark {
-    fields {
-      slug
-    }
-    frontmatter {
-      title
-      date(formatString: "YYYY")
-      categories
-    }
-  }
-`
+// export const query = graphql`
+//   fragment AllProjectsFragment on MarkdownRemark {
+//     fields {
+//       slug
+//     }
+//     frontmatter {
+//       title
+//       date(formatString: "YYYY")
+//       categories
+//     }
+//   }
+// `

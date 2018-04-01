@@ -8,6 +8,7 @@ import ProjectsWrapper from "../components/ProjectsWrapper/ProjectsWrapper"
  */
 
 export default function PageProjects({ data }) {
+  return <ProjectsWrapper projects={[]} />
   return (
     <ProjectsWrapper
       projects={data.allProjects.edges.map(edge => ({
@@ -22,14 +23,14 @@ export default function PageProjects({ data }) {
  * Queries
  */
 
-export const query = graphql`
-  query ProjectsPageQuery {
-    allProjects: allMarkdownRemark {
-      edges {
-        node {
-          ...AllProjectsFragment
-        }
-      }
-    }
-  }
-`
+// export const query = graphql`
+//   query ProjectsPageQuery {
+//     allProjects: allMarkdownRemark {
+//       edges {
+//         node {
+//           ...AllProjectsFragment
+//         }
+//       }
+//     }
+//   }
+// `

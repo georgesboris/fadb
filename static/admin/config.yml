@@ -11,7 +11,7 @@ collections:
     files:
       - label: Settings
         name: settings
-        file: src/content/settings.md
+        file: src/content/pages/settings.md
         fields:
           -
             name: logo
@@ -26,7 +26,7 @@ collections:
             widget: text
       - label: Info
         name: info
-        file: src/content/info.md
+        file: src/content/pages/info.md
         fields:
           -
             name: info_pt
