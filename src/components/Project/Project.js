@@ -32,29 +32,30 @@ const ProjectSubtitle = styled.time`
   font-size: 1.2rem;
 `
 
-const ProjectPicturesWrapper = styled.section`
-  flex-grow: 1;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: -0.5rem;
-`
-
 const ProjectPictureWrapper = styled.div`
   overflow: auto;
   width: 50%;
   padding: 0.5rem;
 `
+
 const ProjectPicture = styled.img`
   float: left;
   width: 100%;
   height: auto;
   cursor: pointer;
-  opacity: 0.95;
-  transition: opacity 0.4s, box-shadow 0.4s;
+  transition: opacity 0.4s;
+`
 
-  &:hover {
-    opacity: 1;
-    box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.2);
+const ProjectPicturesWrapper = styled.section`
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: -0.5rem;
+  &:hover ${ProjectPicture} {
+    opacity: 0.8;
+    &:hover {
+      opacity: 1;
+    }
   }
 `
 
