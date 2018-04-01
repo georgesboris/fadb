@@ -28,7 +28,7 @@ const ProjectTitle = styled.h1`
   font-size: 2rem;
 `
 
-const ProjectDate = styled.time`
+const ProjectSubtitle = styled.time`
   font-size: 1.2rem;
 `
 
@@ -80,7 +80,14 @@ class Project extends Component {
   }
 
   render() {
-    const { title, date, meta, description, images: _images } = this.props
+    const {
+      title,
+      date,
+      meta,
+      description,
+      categories,
+      images: _images
+    } = this.props
     const { activeImage } = this.state
     const images = _images ? _images.map(o => ({ src: o.image })) : []
     return (
@@ -88,7 +95,9 @@ class Project extends Component {
         <ProjectInfoWrapper>
           <ProjectHeader>
             <ProjectTitle>{title}</ProjectTitle>
-            <ProjectDate>{date}</ProjectDate>
+            <ProjectSubtitle>
+              {categories ? `${date} | ${categories}` : date}
+            </ProjectSubtitle>
           </ProjectHeader>
           <TextBlock formatted>{meta}</TextBlock>
           <TextBlock>{description}</TextBlock>
@@ -129,6 +138,7 @@ export const query = graphql`
       title
       date(formatString: "YYYY")
       meta
+      categories
       description
       images {
         image

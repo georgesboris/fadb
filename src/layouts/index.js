@@ -11,20 +11,17 @@ import PropTypes from "prop-types"
  */
 
 injectGlobal`
-  @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700");
-
   * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
   }
-  
-  a:focus, input:focus, button:focus {
-    outline: none;
-  }
 
   html {
     font-size: 62.5%;
+  }
+
+  body {
     font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
   }
 
@@ -34,6 +31,10 @@ injectGlobal`
 
   h1 {
     font-weight: normal;
+  }
+
+  a:focus, input:focus, button:focus {
+    outline: none;
   }
 `
 
@@ -64,6 +65,12 @@ const Layout = ({ children, data }) => {
           {
             name: "keywords",
             content: tags
+          }
+        ]}
+        link={[
+          {
+            rel: "stylesheet",
+            href: "https://fonts.googleapis.com/css?family=Source+Sans+Pro"
           }
         ]}
       />
