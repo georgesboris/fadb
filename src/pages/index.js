@@ -6,7 +6,7 @@ import TextBlock from "../components/TextBlock/TextBlock"
  * Main component
  */
 
-const PageHome = props => {
+const PageHome = ({ data }) => {
   const { info_pt, info_en, contact } = data.info.frontmatter
   return (
     <div>
