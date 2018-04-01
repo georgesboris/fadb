@@ -20,6 +20,9 @@ collections:
           -
             name: title
             label: Site title
+          -
+            name: description
+            label: Site description
           - 
             name: tags
             label: SEO Tags
