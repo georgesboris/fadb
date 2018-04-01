@@ -2,7 +2,6 @@ import React from "react"
 import ProjectsWrapper from "../components/ProjectsWrapper/ProjectsWrapper"
 
 export default function ProjectTemplate({ data }) {
-  return <ProjectsWrapper projects={[]} />
   return (
     <ProjectsWrapper
       project={{
@@ -18,7 +17,7 @@ export default function ProjectTemplate({ data }) {
 }
 
 export const query = graphql`
-  query ProjectPageQuery($title: String!) {
+  query ProjectPageQuery($slug: String!) {
     project: markdownRemark(
       fields: { collection: { eq: "projects" }, slug: { eq: $slug } }
     ) {

@@ -8,7 +8,6 @@ import ProjectsWrapper from "../components/ProjectsWrapper/ProjectsWrapper"
  */
 
 export default function PageProjects({ data }) {
-  return <ProjectsWrapper projects={[]} />
   return (
     <ProjectsWrapper
       projects={data.allProjects.edges.map(edge => ({

@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 import styled, { keyframes } from "styled-components"
+import FaAngleLeft from "react-icons/lib/fa/angle-left"
+import FaAngleRight from "react-icons/lib/fa/angle-right"
 import PropTypes from "prop-types"
 
 /**
@@ -29,14 +31,50 @@ const Wrapper = styled.div`
   cursor: pointer;
 `
 
+const Button = styled.button`
+  position: fixed;
+  top: 50%;
+  left: ${props => (props.right ? "auto" : "0.4rem")};
+  right: ${props => (props.right ? "0.4rem" : "auto")};
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: white;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &:active {
+    transition: none;
+    opacity: 0.4;
+  }
+
+  &:focus {
+    outline: none;
+  }
+`
+
 const Image = styled.img`
   margin: auto;
   max-width: 100%;
-  height: 2000px;
+  height: auto;
   background: white;
   box-shadow: 0 0 2rem rgba(0, 0, 0, 0.8);
   cursor: default;
 `
+
+/**
+ * Helpers
+ */
+
+const c = fn => e => {
+  e.stopPropagation()
+  fn && fn(e)
+}
 
 /**
  * Main component
@@ -53,16 +91,37 @@ class Lightbox extends Component {
     onChangeActiveIndex: PropTypes.func.isRequired
   }
 
+  onClickPrev = () => {
+    const { activeIndex, images, onChangeActiveIndex } = this.props
+    if (images.length) {
+      this.props.onChangeActiveIndex(
+        activeIndex > 0 ? activeIndex - 1 : images.length - 1
+      )
+    }
+  }
+
+  onClickNext = () => {
+    const { activeIndex, images, onChangeActiveIndex } = this.props
+    if (images.length) {
+      this.props.onChangeActiveIndex(
+        activeIndex < images.length - 1 ? activeIndex + 1 : 0
+      )
+    }
+  }
+
   render() {
     const { images, activeIndex, onChangeActiveIndex } = this.props
     return activeIndex !== null &&
       activeIndex >= 0 &&
       activeIndex < images.length ? (
       <Wrapper onClick={() => onChangeActiveIndex(null)}>
-        <Image
-          src={images[activeIndex].src}
-          onClick={e => e.stopPropagation()}
-        />
+        <Button onClick={c(this.onClickPrev)}>
+          <FaAngleLeft size={30} />
+        </Button>
+        <Button right onClick={c(this.onClickNext)}>
+          <FaAngleRight size={30} />
+        </Button>
+        <Image src={images[activeIndex].src} onClick={c()} />
       </Wrapper>
     ) : null
   }
