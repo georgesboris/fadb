@@ -11,21 +11,21 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/src/content/projects`,
+        path: `${__dirname}/src/content/projects/`,
         name: "projects"
       }
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/src/content/pages`,
+        path: `${__dirname}/src/content/pages/`,
         name: "pages"
       }
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/static/media`,
+        path: `${__dirname}/static/media/`,
         name: "media"
       }
     },
