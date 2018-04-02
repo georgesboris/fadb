@@ -3,7 +3,7 @@ backend:
   repo: georgesboris/fadb
 
 media_folder: static/media
-public_folder: /static/media
+public_folder: media
 
 collections:
   - name: pages
