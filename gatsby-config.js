@@ -22,23 +22,28 @@ module.exports = {
         name: "pages"
       }
     },
-    "gatsby-transformer-remark",
-    /**
-     * CMS handling
-     */
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/static/media/`,
-        name: `media`
+        path: `${__dirname}/static/media`,
+        name: "media"
       }
     },
-    "gatsby-plugin-netlify-cms",
+    `gatsby-transformer-remark`,
     /**
      * Image handling
      */
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
+    /**
+     * CMS handling
+     */
+    {
+      resolve: `gatsby-plugin-netlify-cms`,
+      options: {
+        modulePath: `${__dirname}/src/cms/cms.js`
+      }
+    },
     /**
      * Handles netlify caching
      */

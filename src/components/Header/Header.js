@@ -3,7 +3,6 @@ import React from "react"
 import Link from "gatsby-link"
 // etc
 import styled from "styled-components"
-import logoUrl from "./images/logo-fadb.png"
 
 /**
  * Styles
@@ -53,11 +52,11 @@ const NavItem = styled.li`
  * Main component
  */
 
-const Header = () => (
+const Header = ({ logo }) => (
   <header>
     <Title>
       <Link style={{ display: "inline-block", overflow: "auto" }} to="/">
-        <img style={{ float: "left" }} src={logoUrl} />
+        <img style={{ float: "left" }} src={logo} />
       </Link>
     </Title>
 

@@ -24,10 +24,9 @@ description: |-
   simples, mas não deixa de afirmar sua
   importante presença.
 images:
-  - image: /media/foto-005_a.jpg
-  - image: /media/foto-011_a.jpg
-  - image: /media/foto-022_a.jpg
-  - image: /media/google-earth2_2.jpg
-  - image: /media/portfolio_002.jpg
+  - image: /static/media/foto-005_a.jpg
+  - image: /static/media/foto-011_a.jpg
+  - image: /static/media/foto-022_a.jpg
+  - image: /static/media/google-earth2_2.jpg
+  - image: /static/media/portfolio_002.jpg
 ---
-

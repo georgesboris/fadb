@@ -17,6 +17,11 @@ injectGlobal`
     box-sizing: border-box;
   }
 
+  ::selection {
+    color: white; 
+    background: black;
+  }
+
   html {
     font-size: 62.5%;
   }
@@ -54,7 +59,8 @@ const Layout = ({ children, data }) => {
   const {
     site_title: title,
     site_description: description,
-    site_tags: tags
+    site_tags: tags,
+    site_logo: logo
   } = data.settings.frontmatter
   return (
     <Container>
@@ -74,7 +80,7 @@ const Layout = ({ children, data }) => {
           }
         ]}
       />
-      <Header />
+      <Header logo={logo} />
       <Main>{children()}</Main>
     </Container>
   )
@@ -97,6 +103,7 @@ export const query = graphql`
         site_title
         site_description
         site_tags
+        site_logo
       }
     }
   }

@@ -27,7 +27,6 @@ exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
       name: `collection`,
       value: getNodeCollection(node)
     })
-
     createNodeField({
       node,
       name: `slug`,
